@@ -21,6 +21,7 @@ router.post('/', (req, res) => {
  */
 router.delete('/:id', (req, res) => {
   // endpoint functionality
+
 });
 
 /**
