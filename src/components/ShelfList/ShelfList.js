@@ -97,8 +97,10 @@ function ShelfList() {
                                 <td>{item.description}</td>
                                 <td><img width={200} src={item.image_url} /></td>
                                 { user &&    
-                                <td><button onClick={event => {handleUpdate(item)}}>Edit</button></td>
-                                <td><button onClick={() => removeShelfItem(item.id)} >Remove Item</button></td>
+                                <>
+                                    <td><button onClick={event => {handleUpdate(item)}}>Edit</button></td>
+                                    <td><button onClick={() => removeShelfItem(item.id)} >Remove Item</button></td>
+                                </>
                                 }
                             </tr>
                         ))}</>
