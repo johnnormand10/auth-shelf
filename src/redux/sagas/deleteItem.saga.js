@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { put, takeEvery, takeLatest } from 'redux-saga/effects';
-import { useEffect } from 'react';
 
 function* deleteItemSaga() {
     yield takeEvery('DELETE_ITEM', deleteItem);
