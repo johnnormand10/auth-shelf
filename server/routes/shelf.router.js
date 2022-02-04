@@ -49,8 +49,9 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
+  console.log(req.params.id);
   // endpoint functionality
-  console.log('req.user:', req.user);
+  // console.log('req.user:', req.user);
   // if(req.isAuthenticated()) {
       // AND "user_id" = $2
     const queryString = `
@@ -58,7 +59,8 @@ router.delete('/:id', (req, res) => {
       WHERE "id" = $1
     ;`;
     // const queryParams = req.user;
-    pool.query(queryString)
+    const queryParams = [req.params.id];
+    pool.query(queryString, queryParams)
       .then((result) => {
         res.sendStatus(204);
       })
@@ -67,7 +69,7 @@ router.delete('/:id', (req, res) => {
         res.sendStatus(500);
       });
     // } else {
-      res.sendStatus(403);
+      // res.sendStatus(403);
     // }
 });
 
