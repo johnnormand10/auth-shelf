@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React , { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 
 function AddItemForm () {
@@ -11,6 +12,23 @@ function AddItemForm () {
         description: '',
         image_url: ''
     })
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    const getUser = () => {
+        axios.get('/api/user')
+            .then(res => {
+                setUser(res.data);
+            })
+            .catch((err) => {
+                setUser(null);
+                console.log('failed to get user', err);
+            })
+    }
 
     const handleChange = (event, property) => {
         console.log('event happened');
@@ -28,6 +46,7 @@ function AddItemForm () {
 
     return (
         <>
+        { user?
         <form onSubmit={addItem}>
             <input
                 required
@@ -45,6 +64,9 @@ function AddItemForm () {
             />
             <button>Add Item</button>
         </form>
+        :
+        <p>Please log in to add items.</p>
+        }
         </>
     )
 }; // end of AddItemForm

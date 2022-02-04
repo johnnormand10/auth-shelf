@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 /**
  * Get all of the items on the shelf
  */
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
   // Requesting data from the db
   let queryText = `
     SELECT * FROM "item"
@@ -25,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('req.body is:', req.body);
   
   const queryText = `
@@ -79,7 +79,29 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
  */
 router.put('/:id', (req, res) => {
   // endpoint functionality
+  let queryText = `
+    UPDATE "item"
+    SET "description" = $1, "image_url" = $2
+    WHERE "id" = $3
+  `;
+
+  let queryParam = [
+    req.body.description,
+    req.body.image_url,
+    req.params.id
+  ]
+
+  pool.query(queryText, queryParam)
+  .then(result => {
+    console.log('response in PUT is,', res);
+    res.sendStatus(201);
+  })
+  .catch(err => {
+    console.error('ERROR in put request,', err);
+    res.sendStatus(500);
+})
 });
+
 
 /**
  * Return all users along with the total number of items

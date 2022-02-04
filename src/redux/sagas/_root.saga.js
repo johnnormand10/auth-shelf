@@ -3,6 +3,7 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import fetchItemsSaga from './itemList.saga';
+import updateItemSaga from './updateItem.saga';
 import newItemSaga from './newItem.saga';
 import deleteItemSaga from './deleteItem.saga';
 
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     fetchItemsSaga(), // to fetch items, to be called anywhere
+    updateItemSaga(),
     newItemSaga(),
     deleteItemSaga(),
   ]);

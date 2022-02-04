@@ -1,8 +1,8 @@
 import React from 'react';
 import {useEffect} from 'react';
-
-import ShelfList from '../ShelfList/ShelfList';
 import AddItemForm from '../AddItemForm/AddItemForm';
+import ShelfList from '../ShelfList/ShelfList';
+
 
 function ShelfPage() {
 
