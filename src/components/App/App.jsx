@@ -19,6 +19,7 @@ import ShelfPage from '../ShelfPage/ShelfPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import MyShelf from '../MyShelf/MyShelf'
 
 import './App.css';
 
@@ -66,6 +67,14 @@ function App() {
             path="/shelf"
           >
             <ShelfPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // when they hit the MyShelf, they will go to this page
+            exact
+            path="/myShelf"
+          >
+            <MyShelf />
           </ProtectedRoute>
 
           <Route
