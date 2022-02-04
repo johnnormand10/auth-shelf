@@ -14,6 +14,16 @@ function ShelfList() {
     const shelfList = useSelector(store => store.itemList);
     console.log('shelf list is', shelfList);
 
+
+    const removeShelfItem = (id) => {
+        console.log('In removeShelfItem');
+        dispatch({
+            type:   'DELETE_ITEM',
+            payload: {id: id}
+        })
+    }
+    
+
     const [btnStatus, setBtnStatus] = useState(false);
     //default false for future change
 
@@ -58,6 +68,7 @@ function ShelfList() {
         })
 
     }
+
     return (
         <>
             <table>
@@ -83,11 +94,11 @@ function ShelfList() {
                                 <td>{item.description}</td>
                                 <td><img width={200} src={item.image_url} /></td>
                                 <td><button onClick={event => {handleUpdate(item)}}>Edit</button></td>
+                                <td><button onClick={() => removeShelfItem(item.id)} >Remove Item</button></td>
                             </tr>
                         ))}</>
 
                       }
-
                 </tbody>
             </table>
         </>

@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import fetchItemsSaga from './itemList.saga';
 import updateItemSaga from './updateItem.saga';
 import newItemSaga from './newItem.saga';
+import deleteItemSaga from './deleteItem.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,6 @@ export default function* rootSaga() {
     fetchItemsSaga(), // to fetch items, to be called anywhere
     updateItemSaga(),
     newItemSaga(),
+    deleteItemSaga(),
   ]);
 }
