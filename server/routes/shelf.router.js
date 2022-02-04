@@ -115,7 +115,22 @@ router.get('/count', (req, res) => {
  * Return a specific item by id
  */
 router.get('/:id', (req, res) => {
-  // endpoint functionality
+  console.log('id is', req.params.id);
+  
+
+  let queryText = `
+    SELECT * FROM "item"
+    WHERE "user_id" = $1
+  `
+  let queryParams = [req.params.id]
+
+  pool.query(queryText, queryParams)
+    .then ((results) => {
+      res.send(results.rows)
+    })
+    .catch(err => {
+      console.log('ERROR in GET :id', err);
+    })
 });
 
 module.exports = router;
