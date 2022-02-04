@@ -28,10 +28,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', (req, res) => {
   console.log('req.body is:', req.body);
   
-
-  // endpoint functionality
-  console.log('newItem is', newItem);
-
   const queryText = `
     INSERT INTO "item"
       ("description", "image_url", "user_id")
