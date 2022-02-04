@@ -25,8 +25,24 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
-  // endpoint functionality
+router.post('/', rejectUnauthenticated, (req, res) => {
+  console.log('req.body is:', req.body);
+  
+  const queryText = `
+    INSERT INTO "item"
+      ("description", "image_url", "user_id")
+    VALUES ($1, $2, $3);
+  `;
+
+  pool.query(queryText, [req.body.description, req.body.image_url, req.user.id])
+    .then((results) => {
+      res.sendStatus(201)
+    })
+    .catch( err => {
+      console.error(`POST /pets failed`, err);
+      res.sendStatus(500);
+    });
+  
 });
 
 /**
