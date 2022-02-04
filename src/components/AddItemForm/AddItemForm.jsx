@@ -1,4 +1,4 @@
-import React { useState } from 'react';
+import React , { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -43,6 +43,7 @@ function AddItemForm () {
                 value={newItem.image_url}
                 onChange={(event) => handleChange(event, "image_url")}
             />
+            <button>Add Item</button>
         </form>
         </>
     )

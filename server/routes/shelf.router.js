@@ -25,13 +25,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('req.body is:', req.body);
   
-
-  // endpoint functionality
-  console.log('newItem is', newItem);
-
   const queryText = `
     INSERT INTO "item"
       ("description", "image_url", "user_id")
