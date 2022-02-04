@@ -57,7 +57,29 @@ router.delete('/:id', (req, res) => {
  */
 router.put('/:id', (req, res) => {
   // endpoint functionality
+  let queryText = `
+    UPDATE "item"
+    SET "description" = $1, "image_url" = $2
+    WHERE "id" = $3
+  `;
+
+  let queryParam = [
+    req.body.description,
+    req.body.image_url,
+    req.params.id
+  ]
+
+  pool.query(queryText, queryParam)
+  .then(result => {
+    console.log('response in PUT is,', res);
+    res.sendStatus(201);
+  })
+  .catch(err => {
+    console.error('ERROR in put request,', err);
+    res.sendStatus(500);
+})
 });
+
 
 /**
  * Return all users along with the total number of items
